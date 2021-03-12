@@ -54,7 +54,11 @@ class _BillSplitterState extends State<BillSplitter> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "\$123",
+                        "\$  ${calculateTotalPerPerson(
+                          _billAmount,
+                          _personCounter,
+                          _tipPercentage,
+                        )}",
                         style: TextStyle(
                           fontSize: 34.9,
                           fontWeight: FontWeight.bold,
@@ -86,7 +90,7 @@ class _BillSplitterState extends State<BillSplitter> {
                         TextInputType.numberWithOptions(decimal: true),
                     style: TextStyle(color: _purple),
                     decoration: InputDecoration(
-                      prefixText: "Bill Amount",
+                      prefixText: "Amount : ",
                       icon: Icon(Icons.attach_money),
                     ),
                     onChanged: (String value) {
@@ -199,7 +203,7 @@ class _BillSplitterState extends State<BillSplitter> {
                       Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Text(
-                          "\$34",
+                          "\$ ${(calculateTotalTip(_billAmount, _personCounter, _tipPercentage)).toStringAsFixed(2)}",
                           style: TextStyle(
                             color: _purple,
                             fontWeight: FontWeight.bold,
@@ -245,5 +249,25 @@ class _BillSplitterState extends State<BillSplitter> {
         ),
       ),
     );
+  }
+
+  calculateTotalPerPerson(double billAmount, int splitBy, int tipPercentage) {
+    var totalPerPerson =
+        (calculateTotalTip(billAmount, splitBy, tipPercentage) + billAmount) /
+            splitBy;
+
+    return totalPerPerson.toStringAsFixed(2);
+  }
+
+  calculateTotalTip(double billAmount, int splitBy, tipPercentage) {
+    double totalTip = 0.0;
+
+    if (billAmount < 0 || billAmount.toString().isEmpty || billAmount == null) {
+      // no go!
+    } else {
+      totalTip = (billAmount * tipPercentage) / 100;
+    }
+
+    return totalTip;
   }
 }
