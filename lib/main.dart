@@ -51,7 +51,6 @@ class _BillSplitterState extends State<BillSplitter> {
             ),
 
             // Container Bottom Display
-
             Container(
               margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.all(12),
@@ -64,6 +63,7 @@ class _BillSplitterState extends State<BillSplitter> {
                   borderRadius: BorderRadius.circular(12.0)),
               child: Column(
                 children: [
+                  // Input Field of Bill Amount
                   TextField(
                     keyboardType:
                         TextInputType.numberWithOptions(decimal: true),
@@ -81,7 +81,7 @@ class _BillSplitterState extends State<BillSplitter> {
                     },
                   ),
 
-                  // Row Split
+                  // Split Row
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -93,7 +93,6 @@ class _BillSplitterState extends State<BillSplitter> {
                         ),
                       ),
 
-                      // Row Counter
                       Row(
                         children: [
                           // Button ( - )
@@ -166,6 +165,30 @@ class _BillSplitterState extends State<BillSplitter> {
                             ),
                           ),
                         ],
+                      ),
+                    ],
+                  ),
+
+                  // Tip Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Tip",
+                        style: TextStyle(
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          "\$34",
+                          style: TextStyle(
+                            color: _purple,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                        ),
                       )
                     ],
                   ),
